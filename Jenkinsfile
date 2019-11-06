@@ -1,10 +1,10 @@
 pipeline {
 	agent any 
 	stages {
-		stage('Build') {
+		stage('upload to aws') {
 			steps  {
 				withAWS(region:'us-west-2', credentials: 'Jenkins') {
-					s3Upload(file:'index.html', bucket:'myudacityprojectjenkins', path:'/index.html')				
+					s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:’index.html’, bucket:’myudacityprojectjenkins’)				
 				}
 			}
 		}
